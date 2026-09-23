@@ -86,13 +86,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="9i814vZKqEI6brw5ky0F-33" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="GestorUsuario" vertex="1">
-          <mxGeometry height="90" width="280" x="450" y="280" as="geometry" />
+          <mxGeometry height="60" width="280" x="450" y="280" as="geometry" />
         </mxCell>
         <mxCell id="9i814vZKqEI6brw5ky0F-34" parent="9i814vZKqEI6brw5ky0F-33" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="int menuOpciones ()" vertex="1">
           <mxGeometry height="30" width="280" y="30" as="geometry" />
-        </mxCell>
-        <mxCell id="9i814vZKqEI6brw5ky0F-35" parent="9i814vZKqEI6brw5ky0F-33" style="text;strokeColor=#b85450;fillColor=#f8cecc;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="&amp;lt;T&amp;gt; T pedirDato (&lt;span style=&quot;color: rgb(129, 0, 194);&quot;&gt;String&lt;/span&gt; mensaje&lt;span style=&quot;color: rgb(43, 48, 59);&quot;&gt;,&lt;/span&gt; &lt;span style=&quot;color: rgb(129, 0, 194);&quot;&gt;Function&lt;/span&gt;&amp;lt;String&lt;span style=&quot;color: rgb(43, 48, 59);&quot;&gt;,&lt;/span&gt; T&amp;gt; conversor)" vertex="1">
-          <mxGeometry height="30" width="280" y="60" as="geometry" />
         </mxCell>
         <mxCell id="9i814vZKqEI6brw5ky0F-37" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="InterfaceGetrorFichero" vertex="1">
           <mxGeometry height="90" width="230" x="430" y="507" as="geometry" />

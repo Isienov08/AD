@@ -1,10 +1,15 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorMenu {
 
+    List<Cliente> clientes=new ArrayList<Cliente>();
+
     public void darAltaCliente(Cliente c) {
 
-        guadarEnFichero();
+
+
+
     }
 
     public void listaClientes(){
@@ -13,12 +18,12 @@ public class ControladorMenu {
 
     public List<Cliente> buscarClientes(Cliente c) {
 
-        return ;
+        return new ArrayList<>();
     }
 
     public Cliente buscarClientes(int id) {
 
-        return ;
+        return null;
     }
 
 
@@ -37,9 +42,9 @@ public class ControladorMenu {
         //leerFichero
     }
 
-    public List<Pago> buscarPago() {
+    public List<Pagos> buscarPago() {
 
-        return ;
+        return null ;
     }
 
     public void salir() {}
