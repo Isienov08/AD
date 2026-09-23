@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class PagosRepostaje {
+public class Pagos {
     private int id;
     private int idCliente;
     private Date fecha;
@@ -8,7 +8,7 @@ public class PagosRepostaje {
     private double litros;
     private String combustible;
 
-    public PagosRepostaje(int id, int idCliente, Date fecha, double importe, double litros, String combustible) {
+    public Pagos(int id, int idCliente, Date fecha, double importe, double litros, String combustible) {
         this.id = id;
         this.idCliente = idCliente;
         this.fecha = fecha; //formato de la fecha??

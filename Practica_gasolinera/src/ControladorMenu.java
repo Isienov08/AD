@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class ControladorMenu {
 
     public void darAltaCliente() {
@@ -10,6 +12,11 @@ public class ControladorMenu {
         //leerFichero
     }
 
+    public List<Cliente> buscarClientes() {
+
+        return ;
+    }
+
     public void registrarPago() {
         //objeto pago
         //existeFichero o crearFichero
@@ -19,4 +26,12 @@ public class ControladorMenu {
     public void listaPagos(){
         //leerFichero
     }
+
+    public List<Pago> buscarPago() {
+
+        return ;
+    }
+
+    public void salir() {}
+
 }

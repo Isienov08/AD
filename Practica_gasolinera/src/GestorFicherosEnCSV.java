@@ -1,14 +1,11 @@
-public class GestorFicheros {
+public class GestorFicherosEnCSV {
 //    private path ruta;
 
 
-    public GestorFicheros() {
+    public GestorFicherosEnCSV() {
         //llamare a existe y crear
         //para que al instanciar la clase se cree automaticamente el fichero
     }
-
-    public void existeFichero() {}
-    private void crearFichero() {}
 
     public void guadarEnFichero() {}
     public void leerFichero() {}
