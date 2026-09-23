@@ -2,20 +2,30 @@ import java.util.List;
 
 public class ControladorMenu {
 
-    public void darAltaCliente() {
-        //objeto cliente
-        //existeFichero o crearFichero
-        //guadarEnFichero
+    public void darAltaCliente(Cliente c) {
+
+        guadarEnFichero();
     }
 
     public void listaClientes(){
-        //leerFichero
+
     }
 
-    public List<Cliente> buscarClientes() {
+    public List<Cliente> buscarClientes(Cliente c) {
 
         return ;
     }
+
+    public Cliente buscarClientes(int id) {
+
+        return ;
+    }
+
+
+
+
+
+
 
     public void registrarPago() {
         //objeto pago

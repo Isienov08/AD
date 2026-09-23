@@ -10,3 +10,5 @@ public class GestorFicherosEnCSV {
     public void guadarEnFichero() {}
     public void leerFichero() {}
 }
+
+//funcion lambda conversor
