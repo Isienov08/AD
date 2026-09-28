@@ -81,15 +81,15 @@ public class Pagos {
         }
     }
 
-//    @Override
-//    public String toString() {
-//        return "PagosRepostaje{" +
-//                "id=" + id +
-//                ", idCliente=" + idCliente +
-//                ", fecha=" + fecha +
-//                ", importe=" + importe +
-//                ", litros=" + litros +
-//                ", combustible='" + combustible + '\'' +
-//                '}';
-//    }
+   @Override
+    public String toString() {
+        return "PagosRepostaje{" +
+                "id=" + id +
+                ", idCliente=" + idCliente +
+                ", fecha=" + fecha +
+                ", importe=" + importe +
+                ", litros=" + litros +
+                ", combustible='" + combustible + '\'' +
+                '}';
+    }
 }

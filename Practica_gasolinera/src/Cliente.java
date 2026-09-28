@@ -64,15 +64,15 @@ public class Cliente {
         }
     }
 
-//    @Override
-//    public String toString() {
-//        return "Cliente{" +
-//                "id=" + id +
-//                ", nombre='" + nombre + '\'' +
-//                ", telefono='" + telefono + '\'' +
-//                ", matricula='" + matricula + '\'' +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", matricula='" + matricula + '\'' +
+                '}';
+    }
 }
 
 

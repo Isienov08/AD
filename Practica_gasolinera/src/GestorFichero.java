@@ -1,3 +1,7 @@
+import java.util.List;
+
 public interface GestorFichero {
-    public <T> T metodo(String[] campos);
+    public void guadarEnFichero(Object o);
+    public List<Object> leerFichero();
+
 }
