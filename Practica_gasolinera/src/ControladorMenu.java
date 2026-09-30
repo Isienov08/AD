@@ -23,20 +23,44 @@ public class ControladorMenu {
         }
     }
 
+    public void buscarClientes(GestorUsuario gUsuario, GestorFicherosEnCSV gCliente) {
+        // 1. Invocamos leerFichero() que devuelve List<Object>
+        List<Object> listaObjetos = gCliente.leerFichero();
 
+        String busqueda = gUsuario.datoBusquedaCliente().toLowerCase();
 
-    public List<Cliente> buscarClientes(Cliente c) {
+        boolean encontrado = false;
 
-        return new ArrayList<>();
+        if (listaObjetos != null) {
+            for (Object obj : listaObjetos) {
+                // Verificamos que el objeto sea de tipo Cliente
+                if (obj instanceof Cliente) {
+                    // Hacemos el cast explícito a Cliente
+                    Cliente c = (Cliente) obj;
+
+                    // Comprobamos las coincidencias en Nombre, Teléfono o Matrícula
+                    if ((c.getNombre().toLowerCase().contains(busqueda)) ||
+                            c.getTelefono().toLowerCase().contains(busqueda) ||
+                            c.getMatricula().toLowerCase().contains(busqueda)) {
+
+                        // Imprimimos la cabecera solo con la primera coincidencia
+                        if (!encontrado) {
+                            System.out.println("ID\tNOMBRE\tTELÉFONO\tMATRÍCULA");
+                            encontrado = true;
+                        }
+
+                        // Mostramos el cliente formateado
+                        System.out.println(c.getId() + "\t" + c.getNombre() + "\t" + c.getTelefono() + "\t" + c.getMatricula());
+                    }
+                }
+            }
+        }
+
+        // Si no se encontró nada o la lista estaba vacía
+        if (!encontrado) {
+            System.out.println("No se han encontrado clientes.");
+        }
     }
-
-    public Cliente buscarClientes(int id) {
-
-
-        return null;
-    }
-
-
 
     public void registrarPago(GestorUsuario gUsuario, GestorFicherosEnCSV gPagos) {
         Pagos p=gUsuario.datosPagos(generadorIDPago(gPagos));
