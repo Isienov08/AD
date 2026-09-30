@@ -2,6 +2,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -42,15 +45,23 @@ public class GestorFicherosEnCSV {
         };
         this.deserializadorPagos = linea -> {
             String[] campos = linea.split(",", -1);
+            DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-            return new Pagos(
-                    Integer.parseInt(campos[0]),
-                    Integer.parseInt(campos[1]),
-                    java.sql.Date.valueOf(campos[2]),            // fecha (yyyy-MM-dd)
-                    Double.parseDouble(campos[3]),
-                    Double.parseDouble(campos[4]),
-                    campos[5]
-            );
+            Pagos pago;
+            try {
+                pago = new Pagos(
+                        Integer.parseInt(campos[0]),
+                        Integer.parseInt(campos[1]),
+                        LocalDate.parse(campos[2], formateador), // Linea cambiada a LocalDate
+                        Double.parseDouble(campos[3]),
+                        Double.parseDouble(campos[4]),
+                        campos[5]
+                );
+            } catch (DateTimeParseException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                throw new IllegalArgumentException("Error al deserializar la línea [" + linea + "]", e);
+            }
+
+            return pago;
         };
 
     }

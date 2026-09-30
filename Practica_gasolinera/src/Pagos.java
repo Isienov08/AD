@@ -1,24 +1,23 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Pagos {
     private int id;
     private int idCliente;
-    private Date fecha;
+    private LocalDate fecha;
     private double importe;
     private double litros;
     private String combustible;
 
-    public Pagos(int id, int idCliente, Date fecha, double importe, double litros, String combustible) {
+    public Pagos(int id, int idCliente, LocalDate fecha, double importe, double litros, String combustible) {
         this.id = id;
-        this.idCliente = idCliente;
-        this.fecha = fecha; //formato de la fecha??
-        setImporte(importe);//decimales con , y . ??
+        setIdCliente(idCliente);
+        setFecha(fecha);
+        setImporte(importe);
         setLitros(litros);
         setCombustible(combustible);
     }
 
-
-    //Getters y setters
+    // Getters y Setters con validaciones centralizadas
     public int getId() {
         return id;
     }
@@ -32,14 +31,20 @@ public class Pagos {
     }
 
     public void setIdCliente(int idCliente) {
+        if (idCliente <= 0) {
+            throw new IllegalArgumentException("El ID del cliente debe ser un entero positivo.");
+        }
         this.idCliente = idCliente;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
+        if (fecha == null) {
+            throw new IllegalArgumentException("La fecha no puede ser nula.");
+        }
         this.fecha = fecha;
     }
 
@@ -48,11 +53,14 @@ public class Pagos {
     }
 
     public void setImporte(double importe) {
-        if (importe<=0){
-            throw new IllegalArgumentException("El importe no puede estar vacío");
-        }else {
-            this.importe = importe;
+        // Validar positivo y máximo 2 decimales
+        if (importe <= 0) {
+            throw new IllegalArgumentException("El importe debe ser mayor que cero.");
         }
+        if (Math.round(importe * 100.0) != importe * 100.0) {
+            throw new IllegalArgumentException("El importe debe tener como máximo dos decimales.");
+        }
+        this.importe = importe;
     }
 
     public double getLitros() {
@@ -60,11 +68,14 @@ public class Pagos {
     }
 
     public void setLitros(double litros) {
-        if (litros<=0){
-            throw new IllegalArgumentException("Los litros no puede estar vacío");
-        }else {
-            this.litros = litros;
+        // Validar positivo y máximo 2 decimales
+        if (litros <= 0) {
+            throw new IllegalArgumentException("Los litros deben ser mayores que cero.");
         }
+        if (Math.round(litros * 100.0) != litros * 100.0) {
+            throw new IllegalArgumentException("Los litros deben tener como máximo dos decimales.");
+        }
+        this.litros = litros;
     }
 
     public String getCombustible() {
@@ -72,18 +83,15 @@ public class Pagos {
     }
 
     public void setCombustible(String combustible) {
-        String combLimpio=combustible.trim();
-
-        if (combLimpio.isEmpty()){
-            throw new IllegalArgumentException("El combustible no puede estar vacío");
-        }else {
-            this.combustible=combLimpio;
+        if (combustible == null || combustible.trim().isEmpty()) {
+            throw new IllegalArgumentException("El combustible no puede estar vacío.");
         }
+        this.combustible = combustible.trim();
     }
 
-   @Override
+    @Override
     public String toString() {
-        return "PagosRepostaje{" +
+        return "Pagos{" +
                 "id=" + id +
                 ", idCliente=" + idCliente +
                 ", fecha=" + fecha +

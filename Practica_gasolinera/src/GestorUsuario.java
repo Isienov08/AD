@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Scanner;
 
@@ -40,138 +41,68 @@ public class GestorUsuario {
     }
 
     public Cliente datosCliente(int idGenerado) {
+        while (true) {
+            try {
+                System.out.print("Introduce el nombre del cliente: ");
+                String nombre = sc.nextLine();
 
-        String nombre = "";
-        String telefono = "";
-        String matricula = "";
+                System.out.print("Introduce el teléfono del cliente: ");
+                String telefono = sc.nextLine();
 
-        boolean correcto;
+                System.out.print("Introduce la matrícula del cliente: ");
+                String matricula = sc.nextLine();
 
-        correcto = false;
-        while (!correcto) {
-            System.out.print("Introduce el nombre del cliente: ");
-            nombre = sc.nextLine().trim();
-            if (!nombre.isEmpty()) {
-                correcto = true;
-            } else {
-                System.out.println("El nombre no puede estar vacío.");
+                // La validación ocurre dentro del constructor/setters de Cliente
+                return new Cliente(idGenerado, nombre, telefono, matricula);
+
+            } catch (IllegalArgumentException e) {
+                // Muestra el mensaje de error definido en el setter ("El nombre no puede estar vacío", etc.)
+                System.out.println("Error: " + e.getMessage() + ". Inténtalo de nuevo.\n");
             }
         }
-
-        correcto = false;
-        while (!correcto) {
-            System.out.print("Introduce el teléfono del cliente: ");
-            telefono = sc.nextLine().trim();
-            if (!telefono.isEmpty()) {
-                correcto = true;
-            } else {
-                System.out.println("El teléfono no puede estar vacío.");
-            }
-        }
-
-        correcto = false;
-        while (!correcto) {
-            System.out.print("Introduce la matrícula del cliente: ");
-            matricula = sc.nextLine().trim().toUpperCase();
-            if (!matricula.isEmpty()) {
-                correcto = true;
-            } else {
-                System.out.println("La matrícula no puede estar vacía.");
-            }
-        }
-
-        return new Cliente(idGenerado, nombre, telefono, matricula);
     }
 
     public Pagos datosPagos(int idGenerado) {
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                .withResolverStyle(ResolverStyle.STRICT);
 
-        int idCliente = 0;
-        LocalDate fecha = null;
-        double importe = 0;
-        double litros = 0;
-        String combustible = "";
-
-        boolean correcto;
-
-        correcto = false;
-        while (!correcto) {
-            System.out.print("Introduce el ID del cliente: ");
-            String linea = sc.nextLine().trim();
+        while (true) {
             try {
-                idCliente = Integer.parseInt(linea);
-                if (idCliente > 0) {
-                    correcto = true;
+                System.out.print("ID del cliente: ");
+                int idCliente = Integer.parseInt(sc.nextLine().trim());
+
+                System.out.print("Fecha (dd/MM/yyyy; vacío para hoy): ");
+                String textoFecha = sc.nextLine().trim();
+
+                // Conversión de String a LocalDate
+                LocalDate fecha;
+                if (textoFecha.isEmpty()) {
+                    fecha = LocalDate.now(); // Asigna la fecha actual si está vacío
                 } else {
-                    System.out.println("El ID del cliente debe ser un entero positivo.");
+                    fecha = LocalDate.parse(textoFecha, formateador); // Convierte y valida el texto
                 }
+
+                System.out.print("Importe (€): ");
+                double importe = Double.parseDouble(sc.nextLine().trim().replace(",", "."));
+
+                System.out.print("Litros: ");
+                double litros = Double.parseDouble(sc.nextLine().trim().replace(",", "."));
+
+                System.out.print("Combustible: ");
+                String combustible = sc.nextLine();
+
+                // Pasa la instancia de LocalDate directamente al constructor
+                return new Pagos(idGenerado, idCliente, fecha, importe, litros, combustible);
+
             } catch (NumberFormatException e) {
-                System.out.println("Debe introducir un número entero.");
+                System.out.println("Error: El ID del cliente, el importe y los litros deben ser números válidos. Inténtalo de nuevo.\n");
+            } catch (DateTimeParseException e) {
+                System.out.println("Error: La fecha no es válida. Formato requerido: dd/MM/yyyy. Inténtalo de nuevo.\n");
+            } catch (IllegalArgumentException e) {
+                // Muestra las validaciones propias de los setters de Pagos (importe/litros <= 0, etc.)
+                System.out.println("Error: " + e.getMessage() + ". Inténtalo de nuevo.\n");
             }
         }
-
-        correcto = false;
-//        while (!correcto) {
-//            System.out.print("Introduce la fecha (dd/MM/aaaa) o vacío para la actual: ");
-//            String textoFecha = sc.nextLine().trim();
-//            try {
-//                if (textoFecha.isEmpty()) {
-//                    fecha = LocalDate.now();
-//                    correcto = true;
-//                } else {
-//                    DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu")
-//                            .withResolverStyle(ResolverStyle.STRICT);
-//                    fecha = LocalDate.parse(textoFecha, f);
-//                    correcto = true;
-//                }
-//            } catch (Exception e) {
-//                System.out.println("La fecha no es válida. Formato requerido: dd/MM/aaaa.");
-//            }
-//        }
-
-        correcto = false;
-        while (!correcto) {
-            System.out.print("Introduce el importe en euros: ");
-            String textoImporte = sc.nextLine().trim().replace(",", ".");
-            try {
-                importe = Double.parseDouble(textoImporte);
-                if (importe > 0 && textoImporte.matches("\\d+(\\.\\d{1,2})?")) {
-                    correcto = true;
-                } else {
-                    System.out.println("El importe debe ser mayor que cero y tener como máximo dos decimales.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Debe introducir un número válido.");
-            }
-        }
-
-        correcto = false;
-        while (!correcto) {
-            System.out.print("Introduce los litros: ");
-            String textoLitros = sc.nextLine().trim().replace(",", ".");
-            try {
-                litros = Double.parseDouble(textoLitros);
-                if (litros > 0 && textoLitros.matches("\\d+(\\.\\d{1,2})?")) {
-                    correcto = true;
-                } else {
-                    System.out.println("Los litros deben ser mayores que cero y tener como máximo dos decimales.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Debe introducir un número válido.");
-            }
-        }
-
-        correcto = false;
-        while (!correcto) {
-            System.out.print("Introduce el combustible: ");
-            combustible = sc.nextLine().trim();
-            if (!combustible.isEmpty()) {
-                correcto = true;
-            } else {
-                System.out.println("El combustible no puede estar vacío.");
-            }
-        }
-
-        return new Pagos(idGenerado, idCliente, fecha, importe, litros, combustible);
     }
 
     public String datoBusquedaCliente() {
