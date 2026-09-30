@@ -22,7 +22,7 @@ public class Main {
                 case 1 -> controlador.darAltaCliente(gUsuario, gCliente);
                 case 2 -> controlador.listaClientes(gCliente);
                 case 3 -> controlador.buscarClientes(gUsuario, gCliente);
-                case 4 -> controlador.registrarPago(gUsuario, gPagos);
+                case 4 -> controlador.registrarPago(gUsuario, gPagos, gCliente); // Paso de gCliente para validar la FK
                 case 5 -> controlador.listaPagos(gPagos);
                 case 0 -> System.out.println("Hasta pronto.");
                 default -> System.out.println("Opción no válida.");

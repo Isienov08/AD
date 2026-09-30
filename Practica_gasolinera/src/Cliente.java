@@ -1,5 +1,8 @@
 public class Cliente {
     //Atributos
+    // Define el formato de alineación e igualación de ancho
+    // para las columnas del listado (ID, NOMBRE, TELÉFONO, MATRÍCULA).
+    public static final String FORMATO = "%-5s%-15s%-12s%-10s";
     private int id;
     private String nombre;
     private String telefono;
@@ -57,7 +60,7 @@ public class Cliente {
     public void setMatricula(String matricula) {
         String matLimpio=matricula.trim().toUpperCase();
 
-        if (matLimpio.isEmpty()){
+        if (matLimpio.isEmpty()){//validar que sea el nº de cifras y de letras para una matricula
             throw new IllegalArgumentException("La matrícula no puede estar vacío");
         }else {
             this.matricula = matLimpio;
@@ -66,12 +69,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", matricula='" + matricula + '\'' +
-                '}';
+        return String.format(FORMATO, id, nombre, telefono, matricula);
     }
 }
 

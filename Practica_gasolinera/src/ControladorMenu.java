@@ -5,21 +5,36 @@ import java.util.List;
 public class ControladorMenu {
 
     public void darAltaCliente(GestorUsuario gUsuario, GestorFicherosEnCSV gCliente) {
-        Cliente c=gUsuario.datosCliente(generadorIDCliente(gCliente));
+        Cliente c=gUsuario.datosCliente(generadorIDCliente(gCliente), gCliente);
         gCliente.guadarEnFichero(c);
     }
 
-    public void listaClientes(GestorFicherosEnCSV gCliente) {
+    public List<Cliente> obtenerClientes(GestorFicherosEnCSV gCliente) {
         List<Object> listaLeer = gCliente.leerFichero();
-        if (listaLeer.isEmpty()) {
+        List<Cliente> clientes = new ArrayList<>();
+
+        for (Object obj : listaLeer) {
+            if (obj instanceof Cliente c) {
+                clientes.add(c);
+            }
+        }
+
+        return clientes;
+    }
+
+    public void listaClientes(GestorFicherosEnCSV gCliente) {
+        List<Cliente> clientes = obtenerClientes(gCliente);
+
+        if (clientes.isEmpty()) {
             System.out.println("No hay clientes registrados.\n");
             return;
         }
 
-        for (Object obj : listaLeer) {
-            if (obj instanceof Cliente c) {
-                System.out.println(c.toString());
-            }
+        // Imprimir la cabecera
+        System.out.println(String.format(Cliente.FORMATO, "ID", "NOMBRE", "TELÉFONO", "MATRÍCULA"));
+
+        for (Cliente c : clientes) {
+            System.out.println(c.toString());
         }
     }
 
@@ -62,8 +77,8 @@ public class ControladorMenu {
         }
     }
 
-    public void registrarPago(GestorUsuario gUsuario, GestorFicherosEnCSV gPagos) {
-        Pagos p=gUsuario.datosPagos(generadorIDPago(gPagos));
+    public void registrarPago(GestorUsuario gUsuario, GestorFicherosEnCSV gPagos, GestorFicherosEnCSV gCliente) {
+        Pagos p=gUsuario.datosPagos(generadorIDPago(gPagos), gCliente);
         gPagos.guadarEnFichero(p);
     }
 
@@ -73,6 +88,8 @@ public class ControladorMenu {
             System.out.println("No hay pagos registrados.\n");
             return;
         }
+
+        System.out.printf(Pagos.FORMATO + "%n", "ID", "CLIENTE", "FECHA", "IMPORTE", "LITROS", "COMBUSTIBLE");
 
         for (Object obj : listaLeer) {
             if (obj instanceof Pagos p) {
@@ -107,4 +124,6 @@ public class ControladorMenu {
 
         return ultimoPago.getId() + 1;
     }
+
+
 }

@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 
 public class Pagos {
+    // Constante con los 6 campos alineados a la izquierda (%-Ns)
+    public static final String FORMATO = "%-5s%-15s%-14s%-12s%-10s%-15s";
     private int id;
     private int idCliente;
     private LocalDate fecha;
@@ -31,7 +33,7 @@ public class Pagos {
     }
 
     public void setIdCliente(int idCliente) {
-        if (idCliente <= 0) {
+        if (idCliente <= 0) { //Debe corresponder a un cliente
             throw new IllegalArgumentException("El ID del cliente debe ser un entero positivo.");
         }
         this.idCliente = idCliente;
@@ -54,6 +56,7 @@ public class Pagos {
 
     public void setImporte(double importe) {
         // Validar positivo y máximo 2 decimales
+        //El simbolo de los €
         if (importe <= 0) {
             throw new IllegalArgumentException("El importe debe ser mayor que cero.");
         }
@@ -91,13 +94,6 @@ public class Pagos {
 
     @Override
     public String toString() {
-        return "Pagos{" +
-                "id=" + id +
-                ", idCliente=" + idCliente +
-                ", fecha=" + fecha +
-                ", importe=" + importe +
-                ", litros=" + litros +
-                ", combustible='" + combustible + '\'' +
-                '}';
+        return String.format(FORMATO, id, idCliente, fecha, importe, litros, combustible);
     }
 }

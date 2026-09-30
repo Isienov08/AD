@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.util.List;
 import java.util.Scanner;
 
 public class GestorUsuario {
@@ -40,7 +41,7 @@ public class GestorUsuario {
         return opcion;
     }
 
-    public Cliente datosCliente(int idGenerado) {
+    public Cliente datosCliente(int idGenerado, GestorFicherosEnCSV gCliente) {
         while (true) {
             try {
                 System.out.print("Introduce el nombre del cliente: ");
@@ -52,6 +53,11 @@ public class GestorUsuario {
                 System.out.print("Introduce la matrícula del cliente: ");
                 String matricula = sc.nextLine();
 
+                // Validación de matrícula duplicada
+                if (existeMatricula(matricula, gCliente)) {
+                    throw new IllegalArgumentException("La matrícula " + matricula + " ya está registrada a nombre de otro cliente");
+                }
+
                 // La validación ocurre dentro del constructor/setters de Cliente
                 return new Cliente(idGenerado, nombre, telefono, matricula);
 
@@ -62,7 +68,22 @@ public class GestorUsuario {
         }
     }
 
-    public Pagos datosPagos(int idGenerado) {
+    public boolean existeMatricula(String matriculaBuscada, GestorFicherosEnCSV gCliente) {
+        List<Object> listaLeer = gCliente.leerFichero();
+        if (listaLeer != null) {
+            for (Object obj : listaLeer) {
+                if (obj instanceof Cliente c) {
+                    // Comparamos ignorando mayúsculas/minúsculas y espacios
+                    if (c.getMatricula().equalsIgnoreCase(matriculaBuscada.trim())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public Pagos datosPagos(int idGenerado, GestorFicherosEnCSV gCliente) {
         DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy")
                 .withResolverStyle(ResolverStyle.STRICT);
 
@@ -70,6 +91,11 @@ public class GestorUsuario {
             try {
                 System.out.print("ID del cliente: ");
                 int idCliente = Integer.parseInt(sc.nextLine().trim());
+
+                // Validación de la existencia del cliente
+                if (!existeCliente(idCliente, gCliente)) {
+                    throw new IllegalArgumentException("No existe ningún cliente con el ID " + idCliente);
+                }
 
                 System.out.print("Fecha (dd/MM/yyyy; vacío para hoy): ");
                 String textoFecha = sc.nextLine().trim();
@@ -103,6 +129,18 @@ public class GestorUsuario {
                 System.out.println("Error: " + e.getMessage() + ". Inténtalo de nuevo.\n");
             }
         }
+    }
+
+    public boolean existeCliente(int idBuscado, GestorFicherosEnCSV gCliente) {
+        List<Object> listaLeer = gCliente.leerFichero();
+        if (listaLeer != null) {
+            for (Object obj : listaLeer) {
+                if (obj instanceof Cliente c && c.getId() == idBuscado) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public String datoBusquedaCliente() {
