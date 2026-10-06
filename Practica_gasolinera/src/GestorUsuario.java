@@ -41,7 +41,7 @@ public class GestorUsuario {
         return opcion;
     }
 
-    public Cliente datosCliente(int idGenerado, GestorFicherosEnCSV gCliente) {
+    public Cliente datosCliente(int idGenerado, GestorFichero gCliente) {
         while (true) {
             try {
                 System.out.print("Introduce el nombre del cliente: ");
@@ -68,7 +68,7 @@ public class GestorUsuario {
         }
     }
 
-    public boolean existeMatricula(String matriculaBuscada, GestorFicherosEnCSV gCliente) {
+    public boolean existeMatricula(String matriculaBuscada, GestorFichero gCliente) {
         List<Object> listaLeer = gCliente.leerFichero();
         if (listaLeer != null) {
             for (Object obj : listaLeer) {
@@ -83,7 +83,7 @@ public class GestorUsuario {
         return false;
     }
 
-    public Pagos datosPagos(int idGenerado, GestorFicherosEnCSV gCliente) {
+    public Pagos datosPagos(int idGenerado, GestorFichero gCliente) {
         DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy")
                 .withResolverStyle(ResolverStyle.STRICT);
 
@@ -131,7 +131,7 @@ public class GestorUsuario {
         }
     }
 
-    public boolean existeCliente(int idBuscado, GestorFicherosEnCSV gCliente) {
+    public boolean existeCliente(int idBuscado, GestorFichero gCliente) {
         List<Object> listaLeer = gCliente.leerFichero();
         if (listaLeer != null) {
             for (Object obj : listaLeer) {

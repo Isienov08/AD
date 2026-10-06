@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 import static java.nio.file.StandardOpenOption.APPEND;//??
 
-public class GestorFicherosEnCSV {
+public class GestorFicherosEnCSV implements GestorFichero{
     Path ruta;
     private Function<Cliente, String> serializadorCliente;
     private Function<Pagos, String> serializadorPagos;
@@ -78,7 +78,7 @@ public class GestorFicherosEnCSV {
         }
     }
 
-
+    @Override
     public void guadarEnFichero(Object o) {
         try (BufferedWriter bw=Files.newBufferedWriter(this.ruta, APPEND)){
                 String objetoEnCSV = "";
@@ -96,7 +96,7 @@ public class GestorFicherosEnCSV {
         }
     }
 
-
+    @Override
     public List<Object> leerFichero() {
         List<Object> objetos = new ArrayList<>();
         try {

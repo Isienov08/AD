@@ -4,12 +4,12 @@ import java.util.List;
 
 public class ControladorMenu {
 
-    public void darAltaCliente(GestorUsuario gUsuario, GestorFicherosEnCSV gCliente) {
+    public void darAltaCliente(GestorUsuario gUsuario, GestorFichero gCliente) {
         Cliente c=gUsuario.datosCliente(generadorIDCliente(gCliente), gCliente);
         gCliente.guadarEnFichero(c);
     }
 
-    public List<Cliente> obtenerClientes(GestorFicherosEnCSV gCliente) {
+    public List<Cliente> obtenerClientes(GestorFichero gCliente) {
         List<Object> listaLeer = gCliente.leerFichero();
         List<Cliente> clientes = new ArrayList<>();
 
@@ -22,7 +22,7 @@ public class ControladorMenu {
         return clientes;
     }
 
-    public void listaClientes(GestorFicherosEnCSV gCliente) {
+    public void listaClientes(GestorFichero gCliente) {
         List<Cliente> clientes = obtenerClientes(gCliente);
 
         if (clientes.isEmpty()) {
@@ -38,7 +38,7 @@ public class ControladorMenu {
         }
     }
 
-    public void buscarClientes(GestorUsuario gUsuario, GestorFicherosEnCSV gCliente) {
+    public void buscarClientes(GestorUsuario gUsuario, GestorFichero gCliente) {
         // 1. Invocamos leerFichero() que devuelve List<Object>
         List<Object> listaObjetos = gCliente.leerFichero();
 
@@ -77,12 +77,12 @@ public class ControladorMenu {
         }
     }
 
-    public void registrarPago(GestorUsuario gUsuario, GestorFicherosEnCSV gPagos, GestorFicherosEnCSV gCliente) {
+    public void registrarPago(GestorUsuario gUsuario, GestorFichero gPagos, GestorFichero gCliente) {
         Pagos p=gUsuario.datosPagos(generadorIDPago(gPagos), gCliente);
         gPagos.guadarEnFichero(p);
     }
 
-    public void listaPagos(GestorFicherosEnCSV gPagos){
+    public void listaPagos(GestorFichero gPagos){
         List <Object> listaLeer=gPagos.leerFichero();
         if (listaLeer.isEmpty()) {
             System.out.println("No hay pagos registrados.\n");
@@ -99,7 +99,7 @@ public class ControladorMenu {
     }
 
     //asume que el fichero solo lo modifica esta aplicación y que el id más alto está en la última línea
-    public int generadorIDCliente(GestorFicherosEnCSV gestor) {
+    public int generadorIDCliente(GestorFichero gestor) {
         List<Object> lista = gestor.leerFichero();
 
         if (lista == null || lista.isEmpty()) {
@@ -112,7 +112,7 @@ public class ControladorMenu {
         return ultimoCliente.getId() + 1;
     }
 
-    public int generadorIDPago(GestorFicherosEnCSV gestor) {
+    public int generadorIDPago(GestorFichero gestor) {
         List<Object> lista = gestor.leerFichero();
 
         if (lista == null || lista.isEmpty()) {
