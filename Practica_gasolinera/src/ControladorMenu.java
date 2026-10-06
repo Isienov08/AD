@@ -7,6 +7,7 @@ public class ControladorMenu {
     public void darAltaCliente(GestorUsuario gUsuario, GestorFichero gCliente) {
         Cliente c=gUsuario.datosCliente(generadorIDCliente(gCliente), gCliente);
         gCliente.guadarEnFichero(c);
+        System.out.println("Se ha dado de alta el cliente");
     }
 
     public List<Cliente> obtenerClientes(GestorFichero gCliente) {
@@ -80,6 +81,7 @@ public class ControladorMenu {
     public void registrarPago(GestorUsuario gUsuario, GestorFichero gPagos, GestorFichero gCliente) {
         Pagos p=gUsuario.datosPagos(generadorIDPago(gPagos), gCliente);
         gPagos.guadarEnFichero(p);
+        System.out.println("Se ha dado de alta el pago");
     }
 
     public void listaPagos(GestorFichero gPagos){
