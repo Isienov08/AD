@@ -41,4 +41,14 @@ Los CSV no llevan cabecera; la cabecera solo se muestra al listar por consola.
 **Habría que modificar:**
 - `GestorFicherosEnCSV` (o crear un `GestorFicherosEnJSON` que implemente `GestorFichero`): es donde está todo lo que depende del formato: los serializadores y deserializadores, la forma de separar los campos (`split(",")`) y la detección del tipo de registro en `leerFichero`, que ahora se basa en contar campos (4 = cliente, 6 = pago).
 - `Main`: es donde se crean los gestores, así que ahí se cambia la clase concreta y el nombre de los ficheros (por ejemplo, `.csv` por `.json`).
-- Las firmas de `ControladorMenu` y `GestorUsuario`, que reciben el tipo concreto `GestorFicherosEnCSV`. 
+- Las firmas de `ControladorMenu` y `GestorUsuario`, que reciben el tipo concreto `GestorFicherosEnCSV`.
+
+
+
+
+## Práctica 2: persistencia en JSON y migración de datos
+
+### Cambios realizados
+- **Persistencia en JSON**: Se ha creado e implementado una nueva clase (`GestorFicherosEnJSON`) para la gestión y almacenamiento de datos en formato JSON.
+- **Migración de datos**: Se ha creado e implementado una nueva clase dedicada exclusivamente a la migración de datos entre formatos.
+- **Respeto a la arquitectura y código previo**: No se ha modificado la lógica ni la estructura del código existente previamente. Los cambios en clases anteriores se han limitado a añadir nuevos métodos en `GestorUsuario` y `ControladorMenu` necesarios para soportar la migración, sin alterar ni reescribir lo ya desarrollado.
