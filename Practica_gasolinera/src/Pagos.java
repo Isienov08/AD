@@ -56,7 +56,6 @@ public class Pagos {
 
     public void setImporte(double importe) {
         // Validar positivo y máximo 2 decimales
-        //El simbolo de los €
         if (importe <= 0) {
             throw new IllegalArgumentException("El importe debe ser mayor que cero.");
         }

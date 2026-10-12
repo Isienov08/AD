@@ -99,13 +99,10 @@ public class GestorFicherosEnJSON  implements GestorFichero{
     @Override
     public void guardarEnFichero(Object o) {
         //Leo el fichero para tener la lista de clientes|pagos
-        //Si falla (IOException o registro mal formado), lanza excepción y no se escribe nada
         List<Object> objetos = leerFichero();
-
-        //Añado
         objetos.add(o);
 
-        //Reescribo el fichero completo desde 0
+        //Reescribo el fichero completo
         String salto = System.lineSeparator();
 
         String cuerpo = objetos.stream()

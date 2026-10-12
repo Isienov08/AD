@@ -1,6 +1,5 @@
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-import static java.nio.file.StandardOpenOption.APPEND;//??
+import static java.nio.file.StandardOpenOption.APPEND;
 
 public class GestorFicherosEnCSV implements GestorFichero{
     Path ruta;

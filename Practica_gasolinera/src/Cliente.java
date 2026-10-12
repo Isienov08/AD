@@ -46,7 +46,7 @@ public class Cliente {
     public void setTelefono(String telefono) {
         String telefLimpio= telefono.trim();
 
-        if (telefLimpio.isEmpty()){ //validar que sea el nº de cifras de un telef
+        if (telefLimpio.isEmpty()){
             throw new IllegalArgumentException("El teléfono no puede estar vacío");
         }else {
             this.telefono=telefLimpio;
@@ -60,7 +60,7 @@ public class Cliente {
     public void setMatricula(String matricula) {
         String matLimpio=matricula.trim().toUpperCase();
 
-        if (matLimpio.isEmpty()){//validar que sea el nº de cifras y de letras para una matricula
+        if (matLimpio.isEmpty()){
             throw new IllegalArgumentException("La matrícula no puede estar vacío");
         }else {
             this.matricula = matLimpio;
