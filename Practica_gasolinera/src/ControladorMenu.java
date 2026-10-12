@@ -4,6 +4,25 @@ import java.util.List;
 
 public class ControladorMenu {
 
+    public boolean migracion(GestorUsuario gestorUsuario) {
+        if (gestorUsuario.preguntarMigrar().equals("s")){
+            var rutas = gestorUsuario.datosMigrar();
+            try {
+                var resultado = new MigraCSVtoJson().migrar(
+                        rutas.clienteCsv(), rutas.pagoCsv(),
+                        rutas.clienteJson(), rutas.pagoJson());
+                System.out.println("Clientes migrados: " + resultado.clientes());
+                System.out.println("Pagos migrados: " + resultado.pagos());
+                System.out.println("Migración completada.");
+                return true;
+            } catch (RuntimeException e) {
+                System.out.println("Error en la migración: " + e.getMessage());
+                return false;
+            }
+        }
+        return false;
+    }
+
     public void darAltaCliente(GestorUsuario gUsuario, GestorFichero gCliente) {
         Cliente c=gUsuario.datosCliente(generadorIDCliente(gCliente), gCliente);
         gCliente.guardarEnFichero(c);

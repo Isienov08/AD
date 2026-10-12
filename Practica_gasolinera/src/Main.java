@@ -8,6 +8,8 @@ public class Main {
         ControladorMenu controlador=new ControladorMenu();
         GestorUsuario gUsuario=new GestorUsuario();
 
+        controlador.migracion(gUsuario);
+
         GestorFicherosEnCSV gCliente=new GestorFicherosEnCSV(Path.of("cliente.csv"));
         GestorFicherosEnCSV gPagos=new GestorFicherosEnCSV(Path.of("pagos.csv"));
 

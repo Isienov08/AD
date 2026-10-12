@@ -1,3 +1,5 @@
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,6 +10,47 @@ import java.util.Scanner;
 public class GestorUsuario {
 
     private final Scanner sc = new Scanner(System.in);
+
+    public String preguntarMigrar(){
+        while (true){
+            System.out.println("¿Hay ficheros CSV que migrar? (s/n): ");
+            String respuesta=sc.nextLine().trim();
+
+            if (respuesta.isEmpty() && !respuesta.equals("s") && !respuesta.equals("n")) {
+                System.out.println("La respuesta debe ser una de las opciones.");
+                continue;
+            }
+
+            return respuesta;
+        }
+    }
+
+    public record Rutas(Path clienteCsv, Path pagoCsv, Path clienteJson, Path pagoJson) {}
+
+    public Rutas datosMigrar() {
+        Path clienteCsv  = pedirRuta("Ruta del CSV de clientes: ");
+        Path pagoCsv     = pedirRuta("Ruta del CSV de pagos: ");
+        Path clienteJson = pedirRuta("Ruta del JSON de clientes: ");
+        Path pagoJson    = pedirRuta("Ruta del JSON de pagos: ");
+        return new Rutas(clienteCsv, pagoCsv, clienteJson, pagoJson);
+    }
+
+    private Path pedirRuta(String mensaje) {
+        while (true) {
+            System.out.print(mensaje);
+            String texto = sc.nextLine().trim();
+
+            if (texto.isEmpty()) {
+                System.out.println("La ruta no puede estar vacía.");
+                continue;
+            }
+            try {
+                return Path.of(texto);
+            } catch (InvalidPathException e) {
+                System.out.println("Ruta no válida: " + e.getMessage());
+            }
+        }
+    }
 
     public int menuOpciones () {
         System.out.println("=== GESTIÓN DE GASOLINERA ===");

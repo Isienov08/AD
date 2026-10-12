@@ -37,11 +37,15 @@ public class GestorFicherosEnCSV implements GestorFichero{
                         pagos.getCombustible();
         this.deserializadorCliente=linea -> {
             String[] campos = linea.split(",", -1);
-            return new Cliente(
-                    Integer.parseInt(campos[0]),
-                    campos[1],
-                    campos[2],
-                    campos[3]);
+            try {
+                return new Cliente(
+                        Integer.parseInt(campos[0]),
+                        campos[1],
+                        campos[2],
+                        campos[3]);
+            }catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                throw new IllegalArgumentException("Error al deserializar la línea [" + linea + "]", e);
+            }
         };
         this.deserializadorPagos = linea -> {
             String[] campos = linea.split(",", -1);
