@@ -5,9 +5,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //cabecera en csv
-
-
         ControladorMenu controlador=new ControladorMenu();
         GestorUsuario gUsuario=new GestorUsuario();
 
@@ -24,11 +21,11 @@ public class Main {
             opcion = gUsuario.menuOpciones();
 
             switch (opcion) {
-                case 1 -> controlador.darAltaCliente(gUsuario, gCliente);
-                case 2 -> controlador.listaClientes(gCliente);
-                case 3 -> controlador.buscarClientes(gUsuario, gCliente);
-                case 4 -> controlador.registrarPago(gUsuario, gPagos, gCliente); // Paso de gCliente para validar la FK
-                case 5 -> controlador.listaPagos(gPagos);
+                case 1 -> controlador.darAltaCliente(gUsuario, gClienteJSON);
+                case 2 -> controlador.listaClientes(gClienteJSON);
+                case 3 -> controlador.buscarClientes(gUsuario, gClienteJSON);
+                case 4 -> controlador.registrarPago(gUsuario, gPagosJSON, gClienteJSON); // Paso de gCliente para validar la FK
+                case 5 -> controlador.listaPagos(gPagosJSON);
                 case 0 -> System.out.println("Hasta pronto.");
                 default -> System.out.println("Opción no válida.");
             }

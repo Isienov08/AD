@@ -79,7 +79,7 @@ public class GestorFicherosEnCSV implements GestorFichero{
     }
 
     @Override
-    public void guadarEnFichero(Object o) {
+    public void guardarEnFichero(Object o) {
         try (BufferedWriter bw=Files.newBufferedWriter(this.ruta, APPEND)){
                 String objetoEnCSV = "";
                 if (o instanceof Cliente){
