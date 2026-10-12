@@ -84,7 +84,7 @@ public class GestorUsuario {
         return opcion;
     }
 
-    public Cliente datosCliente(int idGenerado, GestorFichero gCliente) {
+    public Cliente datosCliente(int idGenerado, List<Object> clientes) {
         while (true) {
             try {
                 System.out.print("Nombre: ");
@@ -97,7 +97,7 @@ public class GestorUsuario {
                 String matricula = sc.nextLine();
 
                 // Validación de matrícula duplicada
-                if (existeMatricula(matricula, gCliente)) {
+                if (existeMatricula(matricula, clientes)) {
                     throw new IllegalArgumentException("La matrícula " + matricula + " ya está registrada a nombre de otro cliente");
                 }
 
@@ -111,8 +111,8 @@ public class GestorUsuario {
         }
     }
 
-    public boolean existeMatricula(String matriculaBuscada, GestorFichero gCliente) {
-        List<Object> listaLeer = gCliente.leerFichero();
+    public boolean existeMatricula(String matriculaBuscada, List<Object> listaLeer) {
+//        List<Object> listaLeer = gCliente.leerFichero();
         if (listaLeer != null) {
             for (Object obj : listaLeer) {
                 if (obj instanceof Cliente c) {
@@ -126,7 +126,7 @@ public class GestorUsuario {
         return false;
     }
 
-    public Pagos datosPagos(int idGenerado, GestorFichero gCliente) {
+    public Pagos datosPagos(int idGenerado, List<Object> clientes) {
         DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy")
                 .withResolverStyle(ResolverStyle.STRICT);
 
@@ -136,7 +136,7 @@ public class GestorUsuario {
                 int idCliente = Integer.parseInt(sc.nextLine().trim());
 
                 // Validación de la existencia del cliente
-                if (!existeCliente(idCliente, gCliente)) {
+                if (!existeCliente(idCliente, clientes)) {
                     throw new IllegalArgumentException("No existe ningún cliente con el ID " + idCliente);
                 }
 
@@ -174,8 +174,8 @@ public class GestorUsuario {
         }
     }
 
-    public boolean existeCliente(int idBuscado, GestorFichero gCliente) {
-        List<Object> listaLeer = gCliente.leerFichero();
+    public boolean existeCliente(int idBuscado, List<Object> listaLeer) {
+//        List<Object> listaLeer = gCliente.leerFichero();
         if (listaLeer != null) {
             for (Object obj : listaLeer) {
                 if (obj instanceof Cliente c && c.getId() == idBuscado) {

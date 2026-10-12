@@ -26,10 +26,11 @@ public class ControladorMenu {
         return true;
     }
 
-    public void darAltaCliente(GestorUsuario gUsuario, GestorFichero gCliente) {
-        Cliente c=gUsuario.datosCliente(generadorIDCliente(gCliente), gCliente);
-        gCliente.guardarEnFichero(c);
-//        clientes.add(c);
+    public void darAltaCliente(GestorUsuario gUsuario, List<Object> clientes, List<Object> clientesNuevos) {
+        Cliente c=gUsuario.datosCliente(generadorIDCliente(clientes), clientes);
+//        gCliente.guardarEnFichero(c);
+        clientes.add(c);
+        clientesNuevos.add(c);
         System.out.println("Se ha dado de alta el cliente\n");
     }
 
@@ -46,8 +47,8 @@ public class ControladorMenu {
         return clientes;
     }
 
-    public void listaClientes(GestorFichero gCliente) {
-        List<Cliente> clientes = obtenerClientes(gCliente);
+    public void listaClientes(List<Object> clientes) {
+//        List<Cliente> clientes = obtenerClientes(gCliente);
 
         if (clientes.isEmpty()) {
             System.out.println("No hay clientes registrados.\n");
@@ -62,9 +63,9 @@ public class ControladorMenu {
         }
     }
 
-    public void buscarClientes(GestorUsuario gUsuario, GestorFichero gCliente) {
+    public void buscarClientes(GestorUsuario gUsuario, List<Object> listaObjetos) {
         //Invocamos leerFichero() que devuelve List<Object>
-        List<Object> listaObjetos = gCliente.leerFichero();
+//        List<Object> listaObjetos = gCliente.leerFichero();
 
         String busqueda = gUsuario.datoBusquedaCliente().toLowerCase();
 
@@ -101,15 +102,16 @@ public class ControladorMenu {
         }
     }
 
-    public void registrarPago(GestorUsuario gUsuario, GestorFichero gPagos, GestorFichero gCliente) {
-        Pagos p=gUsuario.datosPagos(generadorIDPago(gPagos), gCliente);
-        gPagos.guardarEnFichero(p);
-//        pagos.add(p);
+    public void registrarPago(GestorUsuario gUsuario, List<Object> clientes, List<Object> pagos, List<Object> pagosNuevos) {
+        Pagos p=gUsuario.datosPagos(generadorIDPago(pagos), clientes);
+//        gPagos.guardarEnFichero(p);
+        pagos.add(p);
+        pagosNuevos.add(p);
         System.out.println("Se ha dado de alta el pago \n");
     }
 
-    public void listaPagos(GestorFichero gPagos){
-        List <Object> listaLeer=gPagos.leerFichero();
+    public void listaPagos(List<Object> listaLeer){
+//        List <Object> listaLeer=gPagos.leerFichero();
 
         if (listaLeer.isEmpty()) {
             System.out.println("No hay pagos registrados.\n");
@@ -126,8 +128,8 @@ public class ControladorMenu {
     }
 
     //asume que el fichero solo lo modifica esta aplicación y que el id más alto está en la última línea
-    public int generadorIDCliente(GestorFichero gestor) {
-        List<Object> lista = gestor.leerFichero();
+    public int generadorIDCliente(List<Object> lista) {
+//        List<Object> lista = gestor.leerFichero();
 
         if (lista == null || lista.isEmpty()) {
             return 1;
@@ -139,8 +141,8 @@ public class ControladorMenu {
         return ultimoCliente.getId() + 1;
     }
 
-    public int generadorIDPago(GestorFichero gestor) {
-        List<Object> lista = gestor.leerFichero();
+    public int generadorIDPago(List<Object> lista) {
+//        List<Object> lista = gestor.leerFichero();
 
         if (lista == null || lista.isEmpty()) {
             return 1;
