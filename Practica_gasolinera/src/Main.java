@@ -1,20 +1,30 @@
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class Main {
     public static void main(String[] args) {
+        //arranca la app
         ControladorMenu controlador=new ControladorMenu();
         GestorUsuario gUsuario=new GestorUsuario();
 
-        controlador.migracion(gUsuario);
+        //verificamos la migracion
+        if (Files.notExists(Path.of("cliente.json")) && Files.notExists(Path.of("pagos.json"))){
+            if (!controlador.migracion(gUsuario)) {
+                return;
+            }
+        }
 
-        GestorFicherosEnCSV gCliente=new GestorFicherosEnCSV(Path.of("cliente.csv"));
-        GestorFicherosEnCSV gPagos=new GestorFicherosEnCSV(Path.of("pagos.csv"));
+//        GestorFicherosEnCSV gCliente=new GestorFicherosEnCSV(Path.of("cliente.csv"));
+//        GestorFicherosEnCSV gPagos=new GestorFicherosEnCSV(Path.of("pagos.csv"));
 
+        //Cargamos los datos
         GestorFicherosEnJSON gClienteJSON=new GestorFicherosEnJSON(Path.of("cliente.json"));
         GestorFicherosEnJSON gPagosJSON=new GestorFicherosEnJSON(Path.of("pagos.json"));
+//        List <Object> clientes=gClienteJSON.leerFichero();
+//        List <Object> pagos=gPagosJSON.leerFichero();
+
 
         int opcion;
 
@@ -28,7 +38,9 @@ public class Main {
                 case 3 -> controlador.buscarClientes(gUsuario, gClienteJSON);
                 case 4 -> controlador.registrarPago(gUsuario, gPagosJSON, gClienteJSON); // Paso de gCliente para validar la FK
                 case 5 -> controlador.listaPagos(gPagosJSON);
-                case 0 -> System.out.println("Hasta pronto.");
+                case 0 -> {
+                    System.out.println("Hasta pronto.");
+                }
                 default -> System.out.println("Opción no válida.");
             }
 

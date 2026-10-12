@@ -1,4 +1,6 @@
 [
   {"id": 1,"nombre": "Idaira","telefono": "124578963","matricula": "1478MNC"},
-  {"id": 2,"nombre": "Paca","telefono": "326598741","matricula": "1478LDE"}
+  {"id": 2,"nombre": "Paca","telefono": "326598741","matricula": "1478LDE"},
+  {"id": 3,"nombre": "María","telefono": "456789321","matricula": "1596MLY"},
+  {"id": 4,"nombre": "Nacho","telefono": "753951258","matricula": "3574LOS"}
 ]

@@ -5,7 +5,9 @@ import java.util.List;
 public class ControladorMenu {
 
     public boolean migracion(GestorUsuario gestorUsuario) {
-        if (gestorUsuario.preguntarMigrar().equals("s")){
+        String respuesta = gestorUsuario.preguntarMigrar();
+
+        if (respuesta.equals("s")){
             var rutas = gestorUsuario.datosMigrar();
             try {
                 var resultado = new MigraCSVtoJson().migrar(
@@ -20,13 +22,15 @@ public class ControladorMenu {
                 return false;
             }
         }
-        return false;
+
+        return true;
     }
 
     public void darAltaCliente(GestorUsuario gUsuario, GestorFichero gCliente) {
         Cliente c=gUsuario.datosCliente(generadorIDCliente(gCliente), gCliente);
         gCliente.guardarEnFichero(c);
-        System.out.println("Se ha dado de alta el cliente");
+//        clientes.add(c);
+        System.out.println("Se ha dado de alta el cliente\n");
     }
 
     public List<Cliente> obtenerClientes(GestorFichero gCliente) {
@@ -53,13 +57,13 @@ public class ControladorMenu {
         // Imprimir la cabecera
         System.out.println(String.format(Cliente.FORMATO, "ID", "NOMBRE", "TELÉFONO", "MATRÍCULA"));
 
-        for (Cliente c : clientes) {
+        for (Object c : clientes) {
             System.out.println(c.toString());
         }
     }
 
     public void buscarClientes(GestorUsuario gUsuario, GestorFichero gCliente) {
-        // 1. Invocamos leerFichero() que devuelve List<Object>
+        //Invocamos leerFichero() que devuelve List<Object>
         List<Object> listaObjetos = gCliente.leerFichero();
 
         String busqueda = gUsuario.datoBusquedaCliente().toLowerCase();
@@ -70,7 +74,7 @@ public class ControladorMenu {
             for (Object obj : listaObjetos) {
                 // Verificamos que el objeto sea de tipo Cliente
                 if (obj instanceof Cliente) {
-                    // Hacemos el cast explícito a Cliente
+                    // Hacemos el cast a Cliente
                     Cliente c = (Cliente) obj;
 
                     // Comprobamos las coincidencias en Nombre, Teléfono o Matrícula
@@ -85,7 +89,7 @@ public class ControladorMenu {
                         }
 
                         // Mostramos el cliente formateado
-                        System.out.println(c.getId() + "\t" + c.getNombre() + "\t" + c.getTelefono() + "\t" + c.getMatricula());
+                        System.out.println(c.getId() + "\t" + c.getNombre() + "\t" + c.getTelefono() + "\t" + c.getMatricula()+ "\n");
                     }
                 }
             }
@@ -93,18 +97,20 @@ public class ControladorMenu {
 
         // Si no se encontró nada o la lista estaba vacía
         if (!encontrado) {
-            System.out.println("No se han encontrado clientes.");
+            System.out.println("No se han encontrado clientes. \n");
         }
     }
 
     public void registrarPago(GestorUsuario gUsuario, GestorFichero gPagos, GestorFichero gCliente) {
         Pagos p=gUsuario.datosPagos(generadorIDPago(gPagos), gCliente);
         gPagos.guardarEnFichero(p);
-        System.out.println("Se ha dado de alta el pago");
+//        pagos.add(p);
+        System.out.println("Se ha dado de alta el pago \n");
     }
 
     public void listaPagos(GestorFichero gPagos){
         List <Object> listaLeer=gPagos.leerFichero();
+
         if (listaLeer.isEmpty()) {
             System.out.println("No hay pagos registrados.\n");
             return;

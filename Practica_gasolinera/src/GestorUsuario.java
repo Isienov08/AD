@@ -14,9 +14,9 @@ public class GestorUsuario {
     public String preguntarMigrar(){
         while (true){
             System.out.println("¿Hay ficheros CSV que migrar? (s/n): ");
-            String respuesta=sc.nextLine().trim();
+            String respuesta=sc.nextLine().trim().toLowerCase();
 
-            if (respuesta.isEmpty() && !respuesta.equals("s") && !respuesta.equals("n")) {
+            if (!respuesta.equals("s") && !respuesta.equals("n")) {
                 System.out.println("La respuesta debe ser una de las opciones.");
                 continue;
             }
@@ -87,13 +87,13 @@ public class GestorUsuario {
     public Cliente datosCliente(int idGenerado, GestorFichero gCliente) {
         while (true) {
             try {
-                System.out.print("Introduce el nombre del cliente: ");
+                System.out.print("Nombre: ");
                 String nombre = sc.nextLine();
 
-                System.out.print("Introduce el teléfono del cliente: ");
+                System.out.print("Teléfono: ");
                 String telefono = sc.nextLine();
 
-                System.out.print("Introduce la matrícula del cliente: ");
+                System.out.print("Matrícula: ");
                 String matricula = sc.nextLine();
 
                 // Validación de matrícula duplicada
