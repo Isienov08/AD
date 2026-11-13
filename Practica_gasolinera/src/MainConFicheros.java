@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Main {
+public class MainConFicheros {
     public static void main(String[] args) {
         //arranca la app
         ControladorMenu controlador=new ControladorMenu();
