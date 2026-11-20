@@ -1,3 +1,5 @@
+package app;
+
 public class Cliente {
     //Atributos
     // Define el formato de alineación e igualación de ancho
@@ -72,6 +74,5 @@ public class Cliente {
         return String.format(FORMATO, id, nombre, telefono, matricula);
     }
 }
-
 
 

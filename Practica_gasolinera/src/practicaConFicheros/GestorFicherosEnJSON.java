@@ -1,3 +1,8 @@
+package practicaConFicheros;
+
+import app.Cliente;
+import app.Pagos;
+
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;

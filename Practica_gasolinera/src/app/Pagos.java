@@ -1,3 +1,5 @@
+package app;
+
 import java.time.LocalDate;
 
 public class Pagos {

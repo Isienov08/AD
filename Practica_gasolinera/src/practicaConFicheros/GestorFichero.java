@@ -1,3 +1,5 @@
+package practicaConFicheros;
+
 import java.util.List;
 
 public interface GestorFichero {
