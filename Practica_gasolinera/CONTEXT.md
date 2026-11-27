@@ -156,6 +156,8 @@ En la carpeta raíz del repositorio están el enunciado en PDF de la Práctica 1
 
 ## Trabajo pendiente
 
+- 2026-11-27: Leído el enunciado hasta «El personal y la organización del trabajo»; entidades identificadas: Estación (equivalente a Gasolinera), Surtidor y configuración de facturación.
+- 2026-11-27: Decisión pendiente: representar la configuración de facturación en una tabla propia o como campos de Estación; todavía no se ha elegido una opción.
 - Terminar `bbdd.GestorBBDD`: altas, consultas y conversión de `ResultSet` a
   `Cliente`/`Pagos`, manteniendo `List<Object>` para no romper `app.*`.
 - Crear un punto de entrada que use la base de datos en lugar de los ficheros.
